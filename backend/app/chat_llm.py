@@ -135,7 +135,7 @@ class ChatLLMService:
             return {
                 "trainee_id": trainee_id,
                 "trainee_name": trainee_name,
-                "timestamp": datetime.now(),
+                "timestamp": datetime.now().isoformat(),
                 "question_text": question_text,
                 "transcribed_text": question_text,
                 "resolved_text": question_text,
