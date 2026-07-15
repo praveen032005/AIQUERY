@@ -170,15 +170,20 @@ class ChatLLMService:
             
             if settings.OPENROUTER_API_KEY:
                 # Use custom OpenRouter base URL and key
+                # Prefix with openrouter/ if not present to prevent LiteLLM from thinking it's a native Google model
+                model_name = settings.OPENROUTER_MODEL
+                if not model_name.startswith("openrouter/"):
+                    model_name = f"openrouter/{model_name}"
+                
                 llm = LLM(
-                    model=settings.OPENROUTER_MODEL,
+                    model=model_name,
                     base_url="https://openrouter.ai/api/v1",
                     api_key=settings.OPENROUTER_API_KEY,
                     temperature=0.2,
                     timeout=120,
                     max_tokens=512
                 )
-                detected_model = settings.OPENROUTER_MODEL
+                detected_model = model_name
                 logger.info(f"Using OpenRouter with model: {detected_model}")
             else:
                 detected_model = await asyncio.to_thread(self._get_installed_ollama_model)

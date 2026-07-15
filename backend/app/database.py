@@ -19,8 +19,9 @@ class Database:
 
     async def connect(self):
         try:
-            logger.info(f"Connecting to MongoDB at {settings.MONGODB_URL}...")
-            self.client = AsyncIOMotorClient(settings.MONGODB_URL, serverSelectionTimeoutMS=2000)
+            mongo_url = settings.MONGODB_URI if settings.MONGODB_URI else settings.MONGODB_URL
+            logger.info(f"Connecting to MongoDB at {mongo_url}...")
+            self.client = AsyncIOMotorClient(mongo_url, serverSelectionTimeoutMS=2000)
             self.db = self.client["trainee_analytics"]
             # Trigger a simple command to test if the connection actually works
             await self.client.admin.command('ping')
