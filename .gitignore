@@ -1,0 +1,25 @@
+# Node dependencies (libraries)
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.eslintcache
+
+# Python environment & cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Security & environment variables (private keys)
+.env
+backend/.env
+.env.local
+.env.*.local
